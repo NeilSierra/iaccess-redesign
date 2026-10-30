@@ -240,18 +240,16 @@ export default function TermsPage() {
                       key={page.pageNumber}
                       type="button"
                       onClick={() => goToPage(page.pageNumber)}
-                      className={`w-full text-left p-2.5 rounded-xl border transition-all cursor-pointer flex items-center gap-3 ${
-                        isCurrent
-                          ? "bg-brand-50 border-brand-500 shadow-2xs font-semibold text-brand-900"
-                          : "bg-surface-1/70 border-line/70 hover:bg-surface-2 hover:border-line text-ink"
-                      }`}
+                      className={`w-full text-left p-2.5 rounded-xl border transition-all cursor-pointer flex items-center gap-3 ${isCurrent
+                        ? "bg-brand-50 border-brand-500 shadow-2xs font-semibold text-brand-900"
+                        : "bg-surface-1/70 border-line/70 hover:bg-surface-2 hover:border-line text-ink"
+                        }`}
                     >
                       <span
-                        className={`w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 ${
-                          isCurrent
-                            ? "bg-brand-600 text-white shadow-2xs"
-                            : "bg-surface-2 text-muted"
-                        }`}
+                        className={`w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 ${isCurrent
+                          ? "bg-brand-600 text-white shadow-2xs"
+                          : "bg-surface-2 text-muted"
+                          }`}
                       >
                         {page.pageNumber}
                       </span>
@@ -324,18 +322,16 @@ export default function TermsPage() {
                       key={page.pageNumber}
                       type="button"
                       onClick={() => goToPage(page.pageNumber)}
-                      className={`w-full text-left py-2 px-2.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center gap-2.5 ${
-                        isCurrent
-                          ? "bg-brand-50 border-brand-500 shadow-2xs font-semibold text-brand-900 translate-x-1"
-                          : "bg-surface-1/70 border-line/60 hover:bg-surface-2 hover:border-line text-ink hover:text-brand-800 hover:translate-x-0.5"
-                      }`}
+                      className={`w-full text-left py-2 px-2.5 rounded-xl border transition-all duration-200 cursor-pointer flex items-center gap-2.5 ${isCurrent
+                        ? "bg-brand-50 border-brand-500 shadow-2xs font-semibold text-brand-900 translate-x-1"
+                        : "bg-surface-1/70 border-line/60 hover:bg-surface-2 hover:border-line text-ink hover:text-brand-800 hover:translate-x-0.5"
+                        }`}
                     >
                       <span
-                        className={`w-5 h-5 rounded-md text-[11px] font-bold flex items-center justify-center shrink-0 transition-transform duration-200 ${
-                          isCurrent
-                            ? "bg-brand-600 text-white shadow-2xs scale-105"
-                            : "bg-surface-2 text-muted"
-                        }`}
+                        className={`w-5 h-5 rounded-md text-[11px] font-bold flex items-center justify-center shrink-0 transition-transform duration-200 ${isCurrent
+                          ? "bg-brand-600 text-white shadow-2xs scale-105"
+                          : "bg-surface-2 text-muted"
+                          }`}
                       >
                         {page.pageNumber}
                       </span>
@@ -393,7 +389,7 @@ export default function TermsPage() {
           {/* ============================================================ */}
           {/* 7 MULTI-PAGE DOCUMENT SHEETS (Full verbatim legal content)   */}
           {/* ============================================================ */}
-          <main className="lg:col-span-8 xl:col-span-9 space-y-10 sm:space-y-12">
+          <main className="lg:col-span-8 xl:col-span-9 print:space-y-8">
             {/* ------------------------------------------------------------ */}
             {/* PAGE 1 OF 7                                                  */}
             {/* ------------------------------------------------------------ */}
@@ -837,7 +833,7 @@ export default function TermsPage() {
                   </div>
                   <div className="bg-surface-1 border border-line rounded-xl p-5 space-y-3 text-xs sm:text-sm text-ink leading-relaxed">
                     <p className="font-medium">
-                       In order to help ensure security in my/our transactions and personal information, I/We agree to strictly comply with the following security measures, as may be amended or supplemented by LANDBANK from time to time:
+                      In order to help ensure security in my/our transactions and personal information, I/We agree to strictly comply with the following security measures, as may be amended or supplemented by LANDBANK from time to time:
                     </p>
                     <ol className="list-decimal list-inside space-y-2 text-ink/90 pl-1">
                       <li>To change my/our password/Mobile PIN from time to time as I/we deem necessary;</li>
