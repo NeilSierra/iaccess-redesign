@@ -150,18 +150,7 @@ export function LoginCard() {
             Not yet enrolled? Sign up now!
           </Link>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <a
-              href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
-              download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-brand-700 font-medium transition-colors cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5 text-brand-600" />
-              <span>Download Terms</span>
-            </a>
-            <span className="text-line text-xs" aria-hidden="true">·</span>
+          <div>
             <a
               href="/assets/forms/iAccess_Enrollment_Form.pdf"
               download="LANDBANK_iAccess_Enrollment_Form.pdf"
@@ -172,7 +161,7 @@ export function LoginCard() {
               className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-brand-700 font-medium transition-colors cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Enrollment form</span>
+              <span>Download enrollment form</span>
             </a>
           </div>
         </div>
