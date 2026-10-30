@@ -15,7 +15,8 @@ import {
   Share2,
   ExternalLink,
   BookOpen,
-  X
+  X,
+  Download
 } from "lucide-react";
 import { TERMS_PAGES_META } from "@/data/termsPagesData";
 import {
@@ -94,14 +95,24 @@ export default function TermsPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+          <div className="flex flex-wrap items-center gap-2.5 w-full sm:w-auto">
+            <a
+              href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+              download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 border border-brand-300 bg-brand-50 hover:bg-brand-100 text-brand-900 rounded-lg text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-brand-700" />
+              <span>Download Terms</span>
+            </a>
             <button
               type="button"
               onClick={handlePrint}
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 border border-line bg-surface-1 hover:bg-surface-2 text-ink rounded-lg text-xs font-semibold transition-colors cursor-pointer"
             >
               <Printer className="w-4 h-4 text-muted" />
-              <span>Print / PDF</span>
+              <span>Print</span>
             </button>
             <Link
               href="/"
@@ -114,7 +125,7 @@ export default function TermsPage() {
         </div>
 
         {/* Mobile Page Navigator Bar (sticky on small screens, no-print) */}
-        <div className="no-print lg:hidden sticky top-[50px] z-30 bg-surface-3/95 backdrop-blur-md border border-line rounded-xl p-2.5 sm:p-3 shadow-sm space-y-2">
+        <div className="no-print lg:hidden sticky top-16 z-30 bg-surface-3/95 backdrop-blur-md border border-line rounded-xl p-2.5 sm:p-3 shadow-sm space-y-2">
           <div className="flex items-center justify-between gap-2">
             {/* Tap to open full page list */}
             <button
@@ -276,8 +287,8 @@ export default function TermsPage() {
           {/* ============================================================ */}
           {/* STICKY SIDE PANEL (Compact to fit the screen)               */}
           {/* ============================================================ */}
-          <aside className="no-print hidden lg:block lg:col-span-4 xl:col-span-3 sticky top-20 z-20">
-            <div className="bg-white rounded-2xl border border-line p-4 shadow-xs space-y-3.5 transition-shadow hover:shadow-sm">
+          <aside className="no-print hidden lg:block lg:col-span-4 xl:col-span-3">
+            <div className="sticky top-28 z-20 bg-white rounded-2xl border border-line p-4 shadow-xs space-y-3.5 transition-shadow hover:shadow-sm">
               <div className="flex items-center justify-between border-b border-line pb-2.5">
                 <div className="flex items-center gap-2">
                   <Bookmark className="w-4 h-4 text-brand-600" />
@@ -361,6 +372,20 @@ export default function TermsPage() {
                   <span>Next</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
+              </div>
+
+              {/* Direct Download Terms Link */}
+              <div className="pt-2 border-t border-line">
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-brand-50 hover:bg-brand-100 border border-brand-200 text-xs font-semibold text-brand-900 transition-colors cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5 text-brand-700" />
+                  <span>Download Terms (PDF)</span>
+                </a>
               </div>
             </div>
           </aside>
@@ -470,7 +495,16 @@ export default function TermsPage() {
 
               {/* Official Page Sheet Footer */}
               <div className="border-t border-line pt-4 flex items-center justify-between text-[11px] text-muted">
-                <span>Terms_and_Conditions.pdf</span>
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-brand-700 font-mono transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3 text-brand-600" />
+                  <span>Terms_and_Conditions.pdf</span>
+                </a>
                 <span className="font-mono font-semibold">Page 1 of 7</span>
               </div>
             </article>
@@ -557,7 +591,16 @@ export default function TermsPage() {
 
               {/* Footer */}
               <div className="border-t border-line pt-4 flex items-center justify-between text-[11px] text-muted">
-                <span>Terms_and_Conditions.pdf</span>
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-brand-700 font-mono transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3 text-brand-600" />
+                  <span>Terms_and_Conditions.pdf</span>
+                </a>
                 <span className="font-mono font-semibold">Page 2 of 7</span>
               </div>
             </article>
@@ -627,7 +670,16 @@ export default function TermsPage() {
               </div>
 
               <div className="border-t border-line pt-4 flex items-center justify-between text-[11px] text-muted">
-                <span>Terms_and_Conditions.pdf</span>
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-brand-700 font-mono transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3 text-brand-600" />
+                  <span>Terms_and_Conditions.pdf</span>
+                </a>
                 <span className="font-mono font-semibold">Page 3 of 7</span>
               </div>
             </article>
@@ -683,7 +735,16 @@ export default function TermsPage() {
               </div>
 
               <div className="border-t border-line pt-4 flex items-center justify-between text-[11px] text-muted">
-                <span>Terms_and_Conditions.pdf</span>
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-brand-700 font-mono transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3 text-brand-600" />
+                  <span>Terms_and_Conditions.pdf</span>
+                </a>
                 <span className="font-mono font-semibold">Page 4 of 7</span>
               </div>
             </article>
@@ -739,7 +800,16 @@ export default function TermsPage() {
               </div>
 
               <div className="border-t border-line pt-4 flex items-center justify-between text-[11px] text-muted">
-                <span>Terms_and_Conditions.pdf</span>
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-brand-700 font-mono transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3 text-brand-600" />
+                  <span>Terms_and_Conditions.pdf</span>
+                </a>
                 <span className="font-mono font-semibold">Page 5 of 7</span>
               </div>
             </article>
@@ -843,7 +913,16 @@ export default function TermsPage() {
               </div>
 
               <div className="border-t border-line pt-4 flex items-center justify-between text-[11px] text-muted">
-                <span>Terms_and_Conditions.pdf</span>
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-brand-700 font-mono transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3 text-brand-600" />
+                  <span>Terms_and_Conditions.pdf</span>
+                </a>
                 <span className="font-mono font-semibold">Page 6 of 7</span>
               </div>
             </article>
@@ -921,7 +1000,16 @@ export default function TermsPage() {
 
               {/* Official Page Sheet Footer */}
               <div className="border-t border-line pt-4 flex items-center justify-between text-[11px] text-muted">
-                <span>Terms_and_Conditions.pdf · Complete 7 Pages</span>
+                <a
+                  href="/assets/docs/LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  download="LANDBANK_iAccess_Terms_and_Conditions.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 hover:text-brand-700 font-mono transition-colors cursor-pointer"
+                >
+                  <Download className="w-3 h-3 text-brand-600" />
+                  <span>Terms_and_Conditions.pdf · Complete 7 Pages</span>
+                </a>
                 <span className="font-mono font-bold text-brand-800">Page 7 of 7 · End of Document</span>
               </div>
             </article>

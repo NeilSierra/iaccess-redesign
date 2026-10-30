@@ -4,13 +4,13 @@ export interface NavItem {
 }
 
 export const HEADER_NAV_LINKS: NavItem[] = [
-  { label: "About Us", href: "#about-us" },
-  { label: "FAQs", href: "#faqs" },
-  { label: "Security Policy", href: "/terms#security-policy" },
-  { label: "Data Privacy Statement", href: "/terms#data-privacy" },
-  { label: "Advisory on ATM Use", href: "#advisory-atm" },
-  { label: "iAccess Features", href: "/terms#features" },
-  { label: "Find Us", href: "#find-us" },
+  { label: "About Us", href: "https://www.landbank.com/about" },
+  { label: "FAQs", href: "https://www.lbpiaccess.com/login/infolink?i=1" },
+  { label: "Security Policy", href: "https://www.lbpiaccess.com/login/infolink?i=2" },
+  { label: "Data Privacy Statement", href: "https://www.lbpiaccess.com/login/infolink?i=3" },
+  { label: "Advisory on ATM Use", href: "https://www.lbpiaccess.com/login/infolink?i=5" },
+  { label: "iAccess Features", href: "https://www.lbpiaccess.com/login/infolink?i=4" },
+  { label: "Find Us", href: "https://www.landbank.com/find-us" },
 ];
 
 export const SECURITY_QUESTIONS = [

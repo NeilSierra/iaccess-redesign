@@ -124,6 +124,8 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="hover:text-brand-300 transition-colors inline-flex items-center gap-1"
                     >
                       <span>{link.label}</span>

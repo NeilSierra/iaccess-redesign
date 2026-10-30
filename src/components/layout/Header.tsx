@@ -66,6 +66,8 @@ export function Header() {
               <li key={link.label} className="px-4">
                 <Link
                   href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="hover:text-brand-700 transition-colors focus:outline-hidden focus:text-brand-700"
                 >
                   {link.label}
@@ -121,6 +123,8 @@ export function Header() {
                 <Link
                   key={link.label}
                   href={link.href}
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold text-ink hover:text-brand-700 hover:bg-brand-50/80 active:bg-brand-100 transition-colors"
                 >
