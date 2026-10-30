@@ -104,7 +104,7 @@ export function Footer() {
         {/* 2. MIDDLE TIER: 3-COLUMN STRUCTURE */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
           {/* Column A: Institutional Identity & Links (5 cols) */}
-          <div className="lg:col-span-5 space-y-5">
+          <div className="md:col-span-2 lg:col-span-5 space-y-5">
             <div className="flex items-center gap-3">
               <LandbankLogo className="h-8 w-auto brightness-0 invert" />
               <div className="h-6 w-px bg-white/20" aria-hidden="true" />
