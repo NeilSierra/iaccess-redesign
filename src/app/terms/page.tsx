@@ -30,6 +30,7 @@ import {
 export default function TermsPage() {
   const [activePage, setActivePage] = useState(1);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [highlightedPage, setHighlightedPage] = useState<number | null>(null);
 
   // Lock body scroll when mobile navigator sheet is open
   useEffect(() => {
@@ -67,9 +68,14 @@ export default function TermsPage() {
 
   const scrollToPage = (pageNum: number) => {
     setActivePage(pageNum);
+    setHighlightedPage(pageNum);
+    setTimeout(() => {
+      setHighlightedPage((prev) => (prev === pageNum ? null : prev));
+    }, 1500);
+
     const element = document.getElementById(`page-${pageNum}`);
     if (element) {
-      const offset = 90;
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -87,6 +93,18 @@ export default function TermsPage() {
   };
 
   const progressPercent = Math.round((activePage / 7) * 100);
+
+  const getArticleClass = (pageNum: number) => {
+    const isCurrent = activePage === pageNum;
+    const isHighlighted = highlightedPage === pageNum;
+    return `scroll-mt-20 bg-white rounded-2xl border transition-all duration-500 ease-out p-4 sm:p-10 lg:p-12 space-y-8 relative animate-page-sheet ${
+      isHighlighted
+        ? "border-brand-500 ring-4 ring-brand-500/35 shadow-xl scale-[1.006]"
+        : isCurrent
+        ? "border-brand-300 ring-2 ring-brand-500/20 shadow-md"
+        : "border-line shadow-xs hover:border-line hover:shadow-sm"
+    }`;
+  };
 
   return (
     <div className="flex-1 bg-surface-1 py-8 sm:py-10 px-3 sm:px-6 lg:px-8">
@@ -303,118 +321,120 @@ export default function TermsPage() {
         )}
 
         {/* Two-Column Grid: Sticky Side Panel + Multi-Page Document Body */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
           {/* ============================================================ */}
           {/* STICKY SIDE PANEL (Used for jumping between pages)          */}
           {/* ============================================================ */}
-          <aside className="no-print hidden lg:block lg:col-span-4 xl:col-span-3 sticky top-24 space-y-4">
-            <div className="bg-white rounded-2xl border border-line p-5 shadow-xs space-y-5">
-              <div className="flex items-center justify-between border-b border-line pb-3">
-                <div className="flex items-center gap-2">
-                  <Bookmark className="w-4 h-4 text-brand-600" />
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-ink">
-                    Document Navigator
-                  </h3>
+          <aside className="no-print hidden lg:block lg:col-span-4 xl:col-span-3">
+            <div className="sticky top-20 z-20 space-y-4 max-h-[calc(100vh-5.5rem)] overflow-y-auto pr-1">
+              <div className="bg-white rounded-2xl border border-line p-5 shadow-xs space-y-5 transition-shadow hover:shadow-sm">
+                <div className="flex items-center justify-between border-b border-line pb-3">
+                  <div className="flex items-center gap-2">
+                    <Bookmark className="w-4 h-4 text-brand-600" />
+                    <h3 className="text-xs font-semibold uppercase tracking-wider text-ink">
+                      Document Navigator
+                    </h3>
+                  </div>
+                  <span className="text-[11px] font-mono font-bold text-brand-800 bg-brand-100 px-2 py-0.5 rounded-md">
+                    7 Pages
+                  </span>
                 </div>
-                <span className="text-[11px] font-mono font-bold text-brand-800 bg-brand-100 px-2 py-0.5 rounded-md">
-                  7 Pages
-                </span>
-              </div>
 
-              {/* Progress Indicator */}
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-muted font-medium">Viewing Progress</span>
-                  <span className="font-bold text-brand-700">Page {activePage} of 7 ({progressPercent}%)</span>
+                {/* Progress Indicator */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-muted font-medium">Viewing Progress</span>
+                    <span className="font-bold text-brand-700">Page {activePage} of 7 ({progressPercent}%)</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-surface-2 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-brand-600 transition-all duration-500 ease-out"
+                      style={{ width: `${progressPercent}%` }}
+                    />
+                  </div>
                 </div>
-                <div className="w-full h-1.5 bg-surface-2 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-brand-600 transition-all duration-300"
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
-              </div>
 
-              {/* Page List Navigation Buttons */}
-              <nav className="space-y-1.5" aria-label="Document pages">
-                {TERMS_PAGES_META.map((page) => {
-                  const isCurrent = activePage === page.pageNumber;
-                  return (
-                    <button
-                      key={page.pageNumber}
-                      type="button"
-                      onClick={() => scrollToPage(page.pageNumber)}
-                      className={`w-full text-left p-3 rounded-xl border transition-all cursor-pointer flex items-start gap-3 ${
-                        isCurrent
-                          ? "bg-brand-50 border-brand-500 shadow-2xs"
-                          : "bg-surface-1/70 border-line/70 hover:bg-surface-2 hover:border-line"
-                      }`}
-                    >
-                      <span
-                        className={`w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 ${
+                {/* Page List Navigation Buttons */}
+                <nav className="space-y-1.5" aria-label="Document pages">
+                  {TERMS_PAGES_META.map((page) => {
+                    const isCurrent = activePage === page.pageNumber;
+                    return (
+                      <button
+                        key={page.pageNumber}
+                        type="button"
+                        onClick={() => scrollToPage(page.pageNumber)}
+                        className={`w-full text-left p-3 rounded-xl border transition-all duration-200 cursor-pointer flex items-start gap-3 ${
                           isCurrent
-                            ? "bg-brand-600 text-white shadow-2xs"
-                            : "bg-surface-2 text-muted"
+                            ? "bg-brand-50 border-brand-500 shadow-2xs translate-x-1"
+                            : "bg-surface-1/70 border-line/70 hover:bg-surface-2 hover:border-line hover:translate-x-0.5"
                         }`}
                       >
-                        {page.pageNumber}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between gap-1">
-                          <p
-                            className={`text-xs font-semibold truncate ${
-                              isCurrent ? "text-brand-900" : "text-ink"
-                            }`}
-                          >
-                            {page.title}
-                          </p>
-                          {isCurrent && (
-                            <span className="w-2 h-2 rounded-full bg-brand-600 shrink-0" />
-                          )}
-                        </div>
-                        <p className="text-[11px] text-muted truncate mt-0.5">
-                          {page.subtitle}
-                        </p>
-                        <span className="text-[10px] font-mono text-brand-700/80 mt-1 inline-block">
-                          {page.badge}
+                        <span
+                          className={`w-6 h-6 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 transition-transform duration-300 ${
+                            isCurrent
+                              ? "bg-brand-600 text-white shadow-2xs scale-105"
+                              : "bg-surface-2 text-muted"
+                          }`}
+                        >
+                          {page.pageNumber}
                         </span>
-                      </div>
-                    </button>
-                  );
-                })}
-              </nav>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-1">
+                            <p
+                              className={`text-xs font-semibold truncate transition-colors ${
+                                isCurrent ? "text-brand-900" : "text-ink"
+                              }`}
+                            >
+                              {page.title}
+                            </p>
+                            {isCurrent && (
+                              <span className="w-2 h-2 rounded-full bg-brand-600 shrink-0 animate-pulse" />
+                            )}
+                          </div>
+                          <p className="text-[11px] text-muted truncate mt-0.5">
+                            {page.subtitle}
+                          </p>
+                          <span className="text-[10px] font-mono text-brand-700/80 mt-1 inline-block">
+                            {page.badge}
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </nav>
 
-              {/* Prev / Next Page Steppers */}
-              <div className="pt-2 border-t border-line flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => scrollToPage(Math.max(1, activePage - 1))}
-                  disabled={activePage === 1}
-                  className="flex-1 inline-flex items-center justify-center gap-1 py-2 px-3 rounded-lg border border-line bg-surface-1 text-xs font-semibold text-ink hover:bg-surface-2 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  <span>Previous</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollToPage(Math.min(7, activePage + 1))}
-                  disabled={activePage === 7}
-                  className="flex-1 inline-flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-brand-600 text-xs font-semibold text-white hover:bg-brand-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-2xs"
-                >
-                  <span>Next</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Agreement Status */}
-              <div className="bg-surface-1 rounded-xl p-3 border border-line/80 text-[11px] text-muted space-y-2">
-                <div className="flex items-center gap-1.5 text-brand-800 font-semibold">
-                  <CheckCircle className="w-3.5 h-3.5 text-brand-600" />
-                  <span>Governing Terms</span>
+                {/* Prev / Next Page Steppers */}
+                <div className="pt-2 border-t border-line flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => scrollToPage(Math.max(1, activePage - 1))}
+                    disabled={activePage === 1}
+                    className="flex-1 inline-flex items-center justify-center gap-1 py-2 px-3 rounded-lg border border-line bg-surface-1 text-xs font-semibold text-ink hover:bg-surface-2 disabled:opacity-40 disabled:cursor-not-allowed transition-all active:scale-95"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span>Previous</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => scrollToPage(Math.min(7, activePage + 1))}
+                    disabled={activePage === 7}
+                    className="flex-1 inline-flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-brand-600 text-xs font-semibold text-white hover:bg-brand-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-2xs active:scale-95"
+                  >
+                    <span>Next</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
                 </div>
-                <p className="leading-relaxed">
-                  Upon logging in or signing up, you agree to all terms across all 7 pages.
-                </p>
+
+                {/* Agreement Status */}
+                <div className="bg-surface-1 rounded-xl p-3 border border-line/80 text-[11px] text-muted space-y-2">
+                  <div className="flex items-center gap-1.5 text-brand-800 font-semibold">
+                    <CheckCircle className="w-3.5 h-3.5 text-brand-600" />
+                    <span>Governing Terms</span>
+                  </div>
+                  <p className="leading-relaxed">
+                    Upon logging in or signing up, you agree to all terms across all 7 pages.
+                  </p>
+                </div>
               </div>
             </div>
           </aside>
@@ -428,7 +448,8 @@ export default function TermsPage() {
             {/* ------------------------------------------------------------ */}
             <article
               id="page-1"
-              className="scroll-mt-24 bg-white rounded-2xl border border-line p-4 sm:p-10 lg:p-12 shadow-sm space-y-8 relative"
+              style={{ animationDelay: "0ms" }}
+              className={getArticleClass(1)}
             >
               {/* Official Page Sheet Header */}
               <div className="border-b border-line pb-4 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-wider">
@@ -520,7 +541,8 @@ export default function TermsPage() {
             {/* ------------------------------------------------------------ */}
             <article
               id="page-2"
-              className="scroll-mt-24 bg-white rounded-2xl border border-line p-4 sm:p-10 lg:p-12 shadow-sm space-y-8 relative"
+              style={{ animationDelay: "75ms" }}
+              className={getArticleClass(2)}
             >
               {/* Header */}
               <div className="border-b border-line pb-4 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-wider">
@@ -586,7 +608,8 @@ export default function TermsPage() {
             {/* ------------------------------------------------------------ */}
             <article
               id="page-3"
-              className="scroll-mt-24 bg-white rounded-2xl border border-line p-4 sm:p-10 lg:p-12 shadow-sm space-y-8 relative"
+              style={{ animationDelay: "150ms" }}
+              className={getArticleClass(3)}
             >
               <div className="border-b border-line pb-4 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-wider">
                 <span className="text-brand-800 font-bold">LANDBANK iAccess · Business Rules (6-10) & General Terms</span>
@@ -635,7 +658,8 @@ export default function TermsPage() {
             {/* ------------------------------------------------------------ */}
             <article
               id="page-4"
-              className="scroll-mt-24 bg-white rounded-2xl border border-line p-4 sm:p-10 lg:p-12 shadow-sm space-y-8 relative"
+              style={{ animationDelay: "225ms" }}
+              className={getArticleClass(4)}
             >
               <div className="border-b border-line pb-4 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-wider">
                 <span className="text-brand-800 font-bold">LANDBANK iAccess · General Terms & Conditions (M to Y)</span>
@@ -670,7 +694,8 @@ export default function TermsPage() {
             {/* ------------------------------------------------------------ */}
             <article
               id="page-5"
-              className="scroll-mt-24 bg-white rounded-2xl border border-line p-4 sm:p-10 lg:p-12 shadow-sm space-y-8 relative"
+              style={{ animationDelay: "300ms" }}
+              className={getArticleClass(5)}
             >
               <div className="border-b border-line pb-4 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-wider">
                 <span className="text-brand-800 font-bold">LANDBANK iAccess · General Terms & Conditions (Z to OO)</span>
@@ -705,7 +730,8 @@ export default function TermsPage() {
             {/* ------------------------------------------------------------ */}
             <article
               id="page-6"
-              className="scroll-mt-24 bg-white rounded-2xl border border-line p-4 sm:p-10 lg:p-12 shadow-sm space-y-8 relative"
+              style={{ animationDelay: "375ms" }}
+              className={getArticleClass(6)}
             >
               <div className="border-b border-line pb-4 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-wider">
                 <span className="text-brand-800 font-bold">LANDBANK iAccess · Responsibilities & Customer Care</span>
@@ -788,7 +814,8 @@ export default function TermsPage() {
             {/* ------------------------------------------------------------ */}
             <article
               id="page-7"
-              className="scroll-mt-24 bg-white rounded-2xl border border-line p-4 sm:p-10 lg:p-12 shadow-sm space-y-8 relative"
+              style={{ animationDelay: "450ms" }}
+              className={getArticleClass(7)}
             >
               <div className="border-b border-line pb-4 flex items-center justify-between text-[11px] font-mono text-muted uppercase tracking-wider">
                 <span className="text-brand-800 font-bold">LANDBANK iAccess · Data Privacy Consent & End of Document</span>
