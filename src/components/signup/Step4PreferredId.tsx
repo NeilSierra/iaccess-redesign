@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Check, X, Shield, Eye, EyeOff, AlertCircle } from "lucide-react";
+import { Check, Shield, Eye, EyeOff, AlertCircle } from "lucide-react";
+import { SignUpFormData } from "@/types/signup";
 import { CaptchaBox } from "@/components/ui/CaptchaBox";
 
 export function Step4PreferredId({
   data,
   onChange,
 }: {
-  data: any;
-  onChange: (field: string, value: any) => void;
+  data: SignUpFormData;
+  onChange: (field: string, value: string | boolean) => void;
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);

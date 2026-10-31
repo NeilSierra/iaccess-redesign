@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronRight, Phone, Shield } from "lucide-react";
+import { Menu, X, ChevronRight, Phone } from "lucide-react";
 import { HeaderBrandGroup, IAccessLogo } from "@/components/ui/BrandLogos";
 import { HEADER_NAV_LINKS } from "@/data/navigation";
 

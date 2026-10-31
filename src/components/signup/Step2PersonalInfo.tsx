@@ -1,13 +1,14 @@
 "use client";
 
 import { COUNTRIES } from "@/data/navigation";
+import { SignUpFormData } from "@/types/signup";
 
 export function Step2PersonalInfo({
   data,
   onChange,
 }: {
-  data: any;
-  onChange: (field: string, value: any) => void;
+  data: SignUpFormData;
+  onChange: (field: string, value: string | boolean) => void;
 }) {
   return (
     <div className="space-y-8 animate-in fade-in duration-200">

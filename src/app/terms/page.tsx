@@ -12,8 +12,6 @@ import {
   ChevronLeft,
   ChevronDown,
   Bookmark,
-  Share2,
-  ExternalLink,
   BookOpen,
   X
 } from "lucide-react";

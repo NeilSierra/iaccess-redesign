@@ -1,13 +1,14 @@
 "use client";
 
 import { SECURITY_QUESTIONS } from "@/data/navigation";
+import { SignUpFormData } from "@/types/signup";
 
 export function Step3SecurityQuestions({
   data,
   onChange,
 }: {
-  data: any;
-  onChange: (field: string, value: any) => void;
+  data: SignUpFormData;
+  onChange: (field: string, value: string | boolean) => void;
 }) {
   return (
     <div className="space-y-5 sm:space-y-6 animate-in fade-in duration-200">

@@ -3,13 +3,14 @@
 import { useState } from "react";
 import { CreditCard, Lock, HelpCircle } from "lucide-react";
 import { JaiInfoModal } from "@/components/ui/JaiInfoModal";
+import { SignUpFormData } from "@/types/signup";
 
 export function Step1AtmDetails({
   data,
   onChange,
 }: {
-  data: any;
-  onChange: (field: string, value: any) => void;
+  data: SignUpFormData;
+  onChange: (field: string, value: string | boolean) => void;
 }) {
   const [jaiModalOpen, setJaiModalOpen] = useState(false);
 
@@ -136,7 +137,7 @@ export function Step1AtmDetails({
               id="enableFundTransferToggle"
               type="button"
               role="switch"
-              aria-checked={data.enableFundTransfer || false}
+              aria-checked={Boolean(data.enableFundTransfer)}
               onClick={() => onChange("enableFundTransfer", !data.enableFundTransfer)}
               className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 self-start sm:self-center ${
                 data.enableFundTransfer ? "bg-brand-600" : "bg-slate-300"

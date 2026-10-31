@@ -7,6 +7,7 @@ import { Step1AtmDetails } from "./Step1AtmDetails";
 import { Step2PersonalInfo } from "./Step2PersonalInfo";
 import { Step3SecurityQuestions } from "./Step3SecurityQuestions";
 import { Step4PreferredId } from "./Step4PreferredId";
+import { SignUpFormData } from "@/types/signup";
 
 const STEPS = [
   { id: 1, name: "ATM Details" },
@@ -18,7 +19,7 @@ const STEPS = [
 export function SignUpWizard() {
   const [currentStep, setCurrentStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<SignUpFormData>({
     country: "PHILIPPINES",
     gender: "Male",
     civilStatus: "Single",
@@ -32,8 +33,8 @@ export function SignUpWizard() {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleFieldChange = (field: string, value: any) => {
-    setFormData((prev: any) => ({ ...prev, [field]: value }));
+  const handleFieldChange = (field: string, value: string | boolean) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errorMessage) setErrorMessage(null);
   };
 

@@ -12,9 +12,7 @@ import {
   Lock,
   Database,
   Server,
-  Bug,
-  HelpCircle,
-  ExternalLink
+  Bug
 } from "lucide-react";
 import { LandbankLogo, OverseasFilipinoBankLogo, BancNetLogo, PdicLogo, BspLogo } from "@/components/ui/BrandLogos";
 import { SAMPLE_FX_RATES, HEADER_NAV_LINKS } from "@/data/navigation";
